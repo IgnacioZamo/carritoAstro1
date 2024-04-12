@@ -1,0 +1,60 @@
+[{
+        "id":1,
+        "producto": "Mouse",
+        "descripcion":"Logitech G Pro",
+        "img":"https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-gaming-mouse/plasma-hero-carbon-gallery-1.png?v=1"
+    },
+    {
+        "id":2,
+        "producto": "Teclado",
+        "descripcion":"Teclado gamer - Imperial",
+        "img":"https://www.pngmart.com/files/16/Gaming-Keyboard-PNG-Photos.png"
+    },
+    {
+        "id":3,
+        "producto": "Parlantes",
+        "descripcion":"Parlantes doble baffer",
+        "img":"https://w7.pngwing.com/pngs/322/189/png-transparent-computer-speakers-edifier-r1700bt-loudspeaker-edifier-c2xd-parlante-electronics-speaker-sound.png"
+    },
+    {
+        "id":4,
+        "producto": "Cable USB",
+        "descripcion":"Marca generica",
+        "img":"https://static.vecteezy.com/system/resources/previews/009/339/344/original/usb-cable-port-free-png.png"
+    },
+    {
+        "id":5,
+        "producto": "Pendrive",
+        "descripcion":"Sandisk 64 gb",
+        "img":"https://i.pinimg.com/originals/a0/67/82/a067828c005562830281d53d06c66be7.png"
+    },
+    {
+        "id":6,
+        "producto": "Consolas Play-Station",
+        "descripcion":"Play Station 2, 3, 4 y 5",
+        "img":"https://upload.wikimedia.org/wikipedia/commons/4/46/PS2_png.png"
+    },
+    {
+        "id":7,
+        "producto": "Joystick's consolas",
+        "descripcion":"Play Station 2, 3, 4 y 5",
+        "img":"https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$"
+    },
+    {
+        "id":8,
+        "producto": "Headphone",
+        "descripcion":"Auricular headphone marca Logitech",
+        "img":"https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-gaming-mouse/plasma-hero-carbon-gallery-1.png?v=1"
+    },
+    {
+        "id":9,
+        "producto": "Auriculares inalambricos",
+        "descripcion":"Auriculares inalambricos marca insto",
+        "img":"https://i0.wp.com/woometrix.ar/wp-content/uploads/2022/08/web2.png.webp?fit=1038%2C942&ssl=1"
+    },
+    {
+        "id":10,
+        "producto": "Smartwatch",
+        "descripcion":"Reloj inteligente Noise Colorfit",
+        "img":"https://www.gonoise.com/cdn/shop/products/Icon2-5_grande.png?v=1681610912"
+    }]
