@@ -1,5 +1,6 @@
 ---
 import Tarjeta from "../componentes/tarjetas.astro"
+import Carrito from "../componentes/layout/carrito.astro"
 ---
 
 <html lang="en">
@@ -16,9 +17,13 @@ import Tarjeta from "../componentes/tarjetas.astro"
 
 	</head>
 	<body class="bg-fixed bg-cover" style="background-image: url('https://traptoreditorial.com/wp-content/uploads/2016/04/fondo-minimalista-negro-minimalist-background-fondo-sitio-web-minimalista-fondo-negro-web.jpg')">
-
+		
+		
 		<div class=" top-0 left-0 right-0 mx-auto w-4/5 h-full bg-repeat " style="background-image: url('https://st3.depositphotos.com/7864618/12819/i/450/depositphotos_128198864-stock-photo-blue-abstract-grunge-background-vintage.jpg')">
-
+			<header class="border">
+				<Carrito/>
+			</header>
+			
 			<div class="w-4/5 mx-auto py-10">
 				<h1 class="text-3xl font-bold text-slate-100 underline text-center font-sans">Tienda online</h1>
 			</div>
