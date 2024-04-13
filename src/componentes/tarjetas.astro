@@ -3,7 +3,7 @@ import datos from "../componentes/productos.json";
 
 ---
 
-<div class="px-10 mx-auto grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
+<div id="items" class="px-10 mx-auto grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
     {
         datos.map(function(producto){
             return (
@@ -18,9 +18,11 @@ import datos from "../componentes/productos.json";
                     
                     <div class="my-auto pr-5 pb-5 flex justify-evenly">
                         <p class="font-semibold text-base text-slate-100">Precio:</p>
-                        <p class="font-semibold text-base text-slate-100">{producto.precio}</p>
+                        <p class="precio font-semibold text-base text-slate-100">{producto.precio}</p>
                     </div>
-                    <div class="mx-auto pb-5"> <button class="border-slate-700  bg-sky-800 shadow-2xl text-slate-100 px-3 py-2 rounded-2xl transition hover:scale-105 hover:bg-sky-500 active:bg-sky-300">Comprar</button></div>
+                    <div class="mx-auto pb-5">
+                         <button class="botoncito border-slate-700  bg-sky-800 shadow-2xl text-slate-100 px-3 py-2 rounded-2xl transition hover:scale-105 hover:bg-sky-500 active:bg-sky-300">Comprar</button>
+                    </div>
                 </div>
             )
         })

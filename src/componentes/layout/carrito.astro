@@ -1,5 +1,6 @@
 ---
 
+
 ---
 
 
@@ -10,11 +11,29 @@
 
       <!-- globo debajo de carrito -->
       <div class="absolute bottom-0 right-0 border rounded-full bg-cyan-950 text-white py-1 px-2 z-20">
-        <p class="globito">{
-
-            
-            }</p>
+        <p id="globito"></p>
       </div>
 
       
 </div>
+
+<script>
+const itemsGlobito = []
+let globito = document.getElementById("globito")
+const tarjetas = document.getElementById("items") as HTMLElement;
+
+
+tarjetas.addEventListener("click", e=>{
+  // @ts-ignore
+  if (e.target.classList.contains("botoncito")){
+  // @ts-ignore
+    console.log(e.target.parentElement.parentElement)
+
+  }
+})
+
+
+
+
+
+</script>
