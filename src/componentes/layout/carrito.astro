@@ -26,11 +26,27 @@ const tarjetas = document.getElementById("items") as HTMLElement;
 tarjetas.addEventListener("click", e=>{
   // @ts-ignore
   if (e.target.classList.contains("botoncito")){
+    
+    const elementoSeleccionado = [];
+
   // @ts-ignore
-    console.log(e.target.parentElement.parentElement)
+    const globitoElementoPadre = e.target.parentElement.parentElement;
+    const globitoImgProducto = globitoElementoPadre.firstElementChild;
+    const globitoNombreProducto = globitoElementoPadre.children[1].firstElementChild.textContent
+    const globitoPrecioProducto = globitoElementoPadre.children[2].children[1].textContent
+
+    elementoSeleccionado.push(globitoImgProducto)
+    elementoSeleccionado.push(globitoNombreProducto)
+    elementoSeleccionado.push(globitoPrecioProducto)
+    
+    itemsGlobito.push(elementoSeleccionado)
+
+    globito.innerText = itemsGlobito.length.toString();
 
   }
 })
+
+
 
 
 
