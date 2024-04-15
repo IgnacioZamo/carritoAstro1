@@ -3,9 +3,10 @@
 
 ---
 
-
+<!-- Imagen del carrito superior derecho -->
 <div class="flex justify-end absolute lg:right-36 sm:right-16 top-5 right-2 pb-3 pr-2">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-white z-10">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="carritoImg" class="w-16 h-16 text-white z-10 cursor-pointer">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
       </svg>
 
@@ -16,21 +17,28 @@
 
 </div>
 
-<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8/12 h-5/6 border border-black z-50 bg-gradient-to-br from-sky-900 to-blue-950">
+
+<!-- Interior del carrito -->
+<div id="carritoEnSi" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8/12 min-h-56 pb-20 border border-black z-50 bg-gradient-to-br from-sky-900 to-blue-950">
   <div class="absolute top-5 right-5 cursor-pointer">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="cruzCarrito" class="w-8 h-8 text-white">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
         </svg>
   </div>
   <div class="w-4/5 mx-auto mt-8">
       <h2 class="mx-auto text-center text-5xl text-slate-200 font-semibold underline">Carrito</h2>
-      <div id="elementosAComprar" class="grid grid-cols-3 pt-10">
-        <h5 class="text-xl text-slate-200 text-center mt-5">Imagen</h5>
-        <h5 class="text-xl text-slate-200 text-center mt-5">Producto</h5>
-        <h5 class="text-xl text-slate-200 text-center mt-5"> Precio</h5>
-          
-
-      </div>
+      <div id="elementosAComprar" class="">
+        <div class="grid grid-cols-3 pt-10">
+          <h5 class="text-3xl text-slate-200 text-center mt-5">Imagen</h5>
+          <h5 class="text-3xl text-slate-200 text-center mt-5">Producto</h5>
+          <h5 class="text-3xl text-slate-200 text-center my-5"> Precio</h5>
+        </div>
+      <div id="productosSeleccionados" class="grid grid-cols-3 pt-10"></div>
+    </div>
+  </div>
+  <div class="w-full flex justify-center gap-5 mt-10">
+    <p class="text-slate-100">Total:</p>
+    <p id="totalAPagar" class="text-slate-100"></p>
   </div>
     
 </div>
@@ -39,8 +47,10 @@
 const itemsGlobito = []
 let globito = document.getElementById("globito")
 const tarjetas = document.getElementById("items") as HTMLElement;
+const totalAPagar = document.getElementById("totalAPagar");
 
 
+//Evento que agrega la informacion del json de cada producto, a un array.
 tarjetas.addEventListener("click", e=>{
   // @ts-ignore
   if (e.target.classList.contains("botoncito")){
@@ -49,9 +59,9 @@ tarjetas.addEventListener("click", e=>{
 
   // @ts-ignore
     const globitoElementoPadre = e.target.parentElement.parentElement;
-    const globitoImgProducto = globitoElementoPadre.firstElementChild;
+    const globitoImgProducto = globitoElementoPadre.children[0].firstElementChild.src;
     const globitoNombreProducto = globitoElementoPadre.children[1].firstElementChild.textContent
-    const globitoPrecioProducto = globitoElementoPadre.children[2].children[1].textContent
+    const globitoPrecioProducto = globitoElementoPadre.children[2].children[1].innerText
 
     elementoSeleccionado.push(globitoImgProducto)
     elementoSeleccionado.push(globitoNombreProducto)
@@ -60,32 +70,80 @@ tarjetas.addEventListener("click", e=>{
     itemsGlobito.push(elementoSeleccionado)
 
     globito.innerText = itemsGlobito.length.toString();
+    console.log(itemsGlobito)
 
     renderizarElementos();
-
+    let montoTotal = aPagar();
+        totalAPagar.textContent = `$ ${montoTotal}`;
   }
 })
 
 
+//funcion que renderiza los elementos seleccionados (dentro del array "itemsGlobito" en el interface para el usuario)
 function renderizarElementos() {
-    const elementosAComprar = document.getElementById("elementosAComprar");
-    // elementosAComprar.innerHTML = ""; // Limpiar los elementos antes de volver a renderizar
+    const elementosAComprar1 = document.getElementById("elementosAComprar");
+    const elementosAComprar = elementosAComprar1.querySelector("#productosSeleccionados")
+     elementosAComprar.innerHTML = ""; // Limpiar los elementos antes de volver a renderizar
 
     itemsGlobito.forEach(elemento => {
       const imgSel = document.createElement("img");
-      imgSel.src = elemento[0].src; // La imagen es el primer elemento del array
+      imgSel.src = elemento[0]; 
+      imgSel.className += " lg:h-48 h-24 mx-auto p-5 border"
       elementosAComprar.appendChild(imgSel);
 
-      console.log(imgSel)
-
       const nombreSel = document.createElement("p");
-      nombreSel.textContent = elemento[1]; // El nombre es el segundo elemento del array
+      nombreSel.textContent = elemento[1];
+      nombreSel.className += " mx-auto my-auto text-slate-100 lg:text-lg sm:text-base text-sm "
       elementosAComprar.appendChild(nombreSel);
 
       const precioSel = document.createElement("p");
-      precioSel.textContent = elemento[2]; // El precio es el tercer elemento del array
+      precioSel.textContent = elemento[2]; 
+      precioSel.className += " mx-auto my-auto text-slate-100 lg:text-lg sm:text-base text-sm "
       elementosAComprar.appendChild(precioSel);
     });
   }
+
+
+
+  //funcion que suma todos los elementos seleccionados
+  function aPagar (){
+    let montoApagar = 0
+    itemsGlobito.forEach(e => {const precioNumerico = parseFloat(e[2].replace("$", ""));
+        if (!isNaN(precioNumerico)) {
+            montoApagar += precioNumerico;
+        }
+
+    });
+    
+    return montoApagar
+  }
+
+  //comportamiento del carrito (mostrar y ocultar el carrito)
+
+  const carritoImg = document.getElementById("carritoImg")
+  const carritoEnSi = document.getElementById("carritoEnSi")
+  const cruzCarrito = document.getElementById("cruzCarrito")
+  const cuerpoPrincipal = document.getElementById("cuerpoPagina")
+
+
+  cruzCarrito.addEventListener("click",()=>{
+    ocultarMostrarCarrito();
+  })
+
+  carritoImg.addEventListener("click",()=>{
+    ocultarMostrarCarrito();
+  })
+
+  function ocultarMostrarCarrito (){
+    if(carritoEnSi.classList.contains("hidden")) {
+      carritoEnSi.classList.remove("hidden")
+      cuerpoPrincipal.classList.add("blur")
+    } else {
+      carritoEnSi.classList.add("hidden")
+      cuerpoPrincipal.classList.remove("blur")
+    }
+  }
+
+
 
 </script>
