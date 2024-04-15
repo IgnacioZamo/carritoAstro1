@@ -14,7 +14,25 @@
         <p id="globito"></p>
       </div>
 
-      
+</div>
+
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8/12 h-5/6 border border-black z-50 bg-gradient-to-br from-sky-900 to-blue-950">
+  <div class="absolute top-5 right-5 cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+  </div>
+  <div class="w-4/5 mx-auto mt-8">
+      <h2 class="mx-auto text-center text-5xl text-slate-200 font-semibold underline">Carrito</h2>
+      <div id="elementosAComprar" class="grid grid-cols-3 pt-10">
+        <h5 class="text-xl text-slate-200 text-center mt-5">Imagen</h5>
+        <h5 class="text-xl text-slate-200 text-center mt-5">Producto</h5>
+        <h5 class="text-xl text-slate-200 text-center mt-5"> Precio</h5>
+          
+
+      </div>
+  </div>
+    
 </div>
 
 <script>
@@ -43,13 +61,31 @@ tarjetas.addEventListener("click", e=>{
 
     globito.innerText = itemsGlobito.length.toString();
 
+    renderizarElementos();
+
   }
 })
 
 
+function renderizarElementos() {
+    const elementosAComprar = document.getElementById("elementosAComprar");
+    // elementosAComprar.innerHTML = ""; // Limpiar los elementos antes de volver a renderizar
 
+    itemsGlobito.forEach(elemento => {
+      const imgSel = document.createElement("img");
+      imgSel.src = elemento[0].src; // La imagen es el primer elemento del array
+      elementosAComprar.appendChild(imgSel);
 
+      console.log(imgSel)
 
+      const nombreSel = document.createElement("p");
+      nombreSel.textContent = elemento[1]; // El nombre es el segundo elemento del array
+      elementosAComprar.appendChild(nombreSel);
 
+      const precioSel = document.createElement("p");
+      precioSel.textContent = elemento[2]; // El precio es el tercer elemento del array
+      elementosAComprar.appendChild(precioSel);
+    });
+  }
 
 </script>
