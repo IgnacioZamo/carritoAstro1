@@ -29,13 +29,16 @@
     <div class="lg:w-4/5 w-10/12 mx-auto mt-8">
         <h2 class="mx-auto text-center text-5xl text-slate-200 font-semibold underline">Carrito</h2>
         <div id="elementosAComprar" class="">
-          <div class="grid grid-cols-3 pt-10">
+          <div class="grid grid-cols-4 pt-10">
             <h5 class="lg:text-3xl base:text-lg sm:text-base text-slate-200 text-center mt-5">Imagen</h5>
             <h5 class="lg:text-3xl base:text-lg sm:text-base text-slate-200 text-center mt-5">Producto</h5>
             <h5 class="lg:text-3xl base:text-lg sm:text-base text-slate-200 text-center my-5"> Precio</h5>
+            <h5 class="lg:text-3xl base:text-base sm:text-base text-slate-200 text-center my-5"> cerrar</h5>
           </div>
-        <div id="productosSeleccionados" class="grid grid-cols-3 pt-10"></div>
-      </div>
+          <div id="productosSeleccionados" class="w-full mx-auto">
+
+          </div>
+        </div>
     </div>
     <div class="w-full flex justify-center gap-5 mt-10">
       <p class="text-slate-100 text-3xl">Total:</p>
@@ -74,7 +77,7 @@ tarjetas.addEventListener("click", e=>{
     itemsGlobito.push(elementoSeleccionado)
 
     globito.innerText = itemsGlobito.length.toString();
-    console.log(itemsGlobito)
+
 
     renderizarElementos();
     let montoTotal = aPagar();
@@ -83,31 +86,62 @@ tarjetas.addEventListener("click", e=>{
 })
 
 
+
+
+
 //funcion que renderiza los elementos seleccionados (dentro del array "itemsGlobito" en el interface para el usuario)
 function renderizarElementos() {
-    const elementosAComprar1 = document.getElementById("elementosAComprar");
-    const elementosAComprar = elementosAComprar1.querySelector("#productosSeleccionados")
-     elementosAComprar.innerHTML = ""; // Limpiar los elementos antes de volver a renderizar
+  
+  const elementosAComprar1 = document.getElementById("elementosAComprar");
+  const elementosAComprar = elementosAComprar1.querySelector("#productosSeleccionados")
+  elementosAComprar.innerHTML = ""; // Limpiar los elementos antes de volver a renderizar
+  
+  itemsGlobito.forEach(elemento => {
+      const contenedorElementosAComprar = document.createElement("div")
+      contenedorElementosAComprar.className +="grid grid-cols-4 pt-10"
 
-    itemsGlobito.forEach(elemento => {
       const imgSel = document.createElement("img");
       imgSel.src = elemento[0]; 
       imgSel.className += " lg:h-48 h-24 mx-auto p-5"
-      elementosAComprar.appendChild(imgSel);
+      contenedorElementosAComprar.appendChild(imgSel);
 
       const nombreSel = document.createElement("p");
       nombreSel.textContent = elemento[1];
       nombreSel.className += " mx-auto my-auto text-slate-100 lg:text-lg sm:text-base text-sm "
-      elementosAComprar.appendChild(nombreSel);
+      contenedorElementosAComprar.appendChild(nombreSel);
 
       const precioSel = document.createElement("p");
       precioSel.textContent = elemento[2]; 
       precioSel.className += " mx-auto my-auto text-slate-100 lg:text-lg sm:text-base text-sm "
-      elementosAComprar.appendChild(precioSel);
+      contenedorElementosAComprar.appendChild(precioSel);
+
+      const cruzProducto = document.createElement("img");
+      cruzProducto.src = "https://cdn.icon-icons.com/icons2/2098/PNG/512/close_cross_icon_128690.png";
+      cruzProducto.className += "h-6 w-6 mx-auto my-auto text-white cursor-pointer";
+      contenedorElementosAComprar.appendChild(cruzProducto);
+
+      elementosAComprar.appendChild(contenedorElementosAComprar)
+
+
+      //function para eliminar productos
+      cruzProducto.addEventListener("click", e =>{
+        const cruz = e.target
+        // @ts-ignore
+        const cruzEliminar = cruz.parentElement
+        console.log(cruzEliminar)
+        cruzEliminar.remove()
+        actualizarContadorProductos()
+
+          //funcion que actualiza el numero del globito
+
+      })
+
     });
+}
+
+  function actualizarContadorProductos() {
+    globito.innerText = itemsGlobito.length.toString();
   }
-
-
 
   //funcion que suma todos los elementos seleccionados
   function aPagar (){
